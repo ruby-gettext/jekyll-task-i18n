@@ -108,25 +108,25 @@ module Jekyll
             end
 
             edit_po_file_mtime = path.edit_po_file.mtime
-            GetText::Tools::MsgMerge.run("--update",
-                                         "--sort-by-file",
-                                         "--no-wrap",
-                                         path.edit_po_file.to_s,
-                                         path.pot_file.to_s)
+            msgmerge("--update",
+                     "--sort-by-file",
+                     "--no-wrap",
+                     path.edit_po_file.to_s,
+                     path.pot_file.to_s)
             if path.po_file.exist? and path.po_file.mtime > edit_po_file_mtime
-              GetText::Tools::MsgMerge.run("--output", path.edit_po_file.to_s,
-                                           "--sort-by-file",
-                                           "--no-obsolete-entries",
-                                           path.po_file.to_s,
-                                           path.edit_po_file.to_s)
+              msgmerge("--output", path.edit_po_file.to_s,
+                       "--sort-by-file",
+                       "--no-obsolete-entries",
+                       path.po_file.to_s,
+                       path.edit_po_file.to_s)
             end
             if path.all_po_file.exist?
-              GetText::Tools::MsgMerge.run("--output", path.edit_po_file.to_s,
-                                           "--sort-by-file",
-                                           "--no-fuzzy-matching",
-                                           "--no-obsolete-entries",
-                                           path.all_po_file.to_s,
-                                           path.edit_po_file.to_s)
+              msgmerge("--output", path.edit_po_file.to_s,
+                       "--sort-by-file",
+                       "--no-fuzzy-matching",
+                       "--no-obsolete-entries",
+                       path.all_po_file.to_s,
+                       path.edit_po_file.to_s)
             end
           end
         end
@@ -271,6 +271,10 @@ module Jekyll
           options.concat(["--translator-email", @translator_email])
         end
         options
+      end
+
+      def msgmerge(*arguments)
+        GetText::Tools::MsgMerge.run(*arguments)
       end
 
       class Path
