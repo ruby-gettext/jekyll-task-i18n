@@ -1,3 +1,4 @@
+# Copyright (C) 2014  The ruby-gettext project
 # Copyright (C) 2013-2014 Droonga Project
 #
 # This library is free software; you can redistribute it and/or
@@ -19,7 +20,10 @@ require "rake/clean"
 require "yard"
 require "gettext/tools"
 
-class I18nTask
+
+module Jekyll
+  module Task
+class I18n
   class << self
     def define(&block)
       task = new
@@ -317,5 +321,7 @@ class I18nTask
     def translated_file_dir
       Pathname(@locale) + @target_file_path
     end
+  end
+end
   end
 end
