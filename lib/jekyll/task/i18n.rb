@@ -101,10 +101,9 @@ module Jekyll
               if path.po_file.exist?
                 cp(path.po_file.to_s, path.edit_po_file.to_s)
               else
-                GetText::Tools::MsgInit.run("--input", path.pot_file.to_s,
-                                            "--output", path.edit_po_file.to_s,
-                                            "--locale", locale,
-                                            *msginit_options)
+                msginit("--input", path.pot_file.to_s,
+                        "--output", path.edit_po_file.to_s,
+                        "--locale", locale)
               end
             end
 
@@ -257,6 +256,10 @@ module Jekyll
         po_parser.parse_file(@po_dir_path + "#{locale}.po", messages)
         yard_locale.instance_variable_get("@messages").merge!(messages)
         yard_locale
+      end
+
+      def msginit(*arguments)
+        GetText::Tools::MsgInit.run(*(msginit_options + arguments))
       end
 
       def msginit_options
