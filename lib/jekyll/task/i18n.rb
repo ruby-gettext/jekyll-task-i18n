@@ -164,16 +164,16 @@ module Jekyll
 
           CLEAN << path.time_stamp_file.to_s if path.time_stamp_file.exist?
           file po_file => [path.edit_po_file.to_s] do
-            GetText::Tools::MsgCat.run("--output", po_file,
-                                       "--sort-by-file",
-                                       "--no-all-comments",
-                                       "--no-report-warning",
-                                       "--no-obsolete-entries",
-                                       "--remove-header-field=Report-Msgid-Bugs-To",
-                                       "--remove-header-field=Last-Translator",
-                                       "--remove-header-field=Language-Team",
-                                       "--remove-header-field=POT-Creation-Date",
-                                       path.edit_po_file.to_s)
+            msgcat("--output", po_file,
+                   "--sort-by-file",
+                   "--no-all-comments",
+                   "--no-report-warning",
+                   "--no-obsolete-entries",
+                   "--remove-header-field=Report-Msgid-Bugs-To",
+                   "--remove-header-field=Last-Translator",
+                   "--remove-header-field=Language-Team",
+                   "--remove-header-field=POT-Creation-Date",
+                   path.edit_po_file.to_s)
             touch(path.time_stamp_file.to_s)
           end
         end
@@ -182,12 +182,12 @@ module Jekyll
         all_po_file = all_po_file_path.to_s
         CLEAN << all_po_file if all_po_file_path.exist?
         file all_po_file => po_files do
-          GetText::Tools::MsgCat.run("--output", all_po_file,
-                                     "--no-fuzzy",
-                                     "--no-all-comments",
-                                     "--sort-by-msgid",
-                                     "--no-obsolete-entries",
-                                     *po_files)
+          msgcat("--output", all_po_file,
+                 "--no-fuzzy",
+                 "--no-all-comments",
+                 "--sort-by-msgid",
+                 "--no-obsolete-entries",
+                 *po_files)
         end
 
         desc "Update .po files for [#{locale}] locale"
@@ -275,6 +275,10 @@ module Jekyll
 
       def msgmerge(*arguments)
         GetText::Tools::MsgMerge.run(*arguments)
+      end
+
+      def msgcat(*arguments)
+        GetText::Tools::MsgCat.run(*arguments)
       end
 
       class Path
