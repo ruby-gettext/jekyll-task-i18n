@@ -48,8 +48,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency("gettext", ">= 3.1.1")
   spec.add_runtime_dependency("yard")
 
-  spec.add_developement_dependency("rake")
-  spec.add_developement_dependency("bundler")
-  spec.add_developement_dependency("packnga")
-  spec.add_developement_dependency("kramdown")
+  spec.add_development_dependency("rake")
+  spec.add_development_dependency("bundler")
+  spec.add_development_dependency("packnga")
+  spec.add_development_dependency("kramdown")
 end
