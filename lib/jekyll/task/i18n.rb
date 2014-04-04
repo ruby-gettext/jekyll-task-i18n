@@ -51,6 +51,7 @@ module Jekyll
       end
 
       def define
+        namespace :jekyll do
         namespace :i18n do
           namespace :internal do
             task :force
@@ -65,6 +66,7 @@ module Jekyll
           end
 
           define_translate_task
+        end
         end
       end
 
