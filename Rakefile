@@ -14,8 +14,6 @@
 # License along with this program.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-task :default => :test
-
 require "bundler/gem_helper"
 require "packnga"
 
