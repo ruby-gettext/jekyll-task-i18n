@@ -52,21 +52,21 @@ module Jekyll
 
       def define
         namespace :jekyll do
-        namespace :i18n do
-          namespace :internal do
-            task :force
-          end
-
-          namespace :po do
-            namespace :edit do
-              define_edit_po_update_task
+          namespace :i18n do
+            namespace :internal do
+              task :force
             end
 
-            define_po_update_task
-          end
+            namespace :po do
+              namespace :edit do
+                define_edit_po_update_task
+              end
 
-          define_translate_task
-        end
+              define_po_update_task
+            end
+
+            define_translate_task
+          end
         end
       end
 
