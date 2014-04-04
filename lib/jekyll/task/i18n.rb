@@ -99,6 +99,10 @@ module Jekyll
             path.pot_file.open("w") do |pot_file|
               pot_file.puts(generator.generate)
             end
+            if po_file_is_updated?(path)
+              rm_f(path.edit_po_file.to_s)
+              rm_f(path.all_po_file.to_s)
+            end
             unless path.edit_po_file.exist?
               if path.po_file.exist?
                 cp(path.po_file.to_s, path.edit_po_file.to_s)
