@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.version = Jekyll::Task::I18n::VERSION.dup
 
   spec.authors = ["Kouhei Sutou"]
-  spec.emails = ["kou@clear-code.com"]
+  spec.email = ["kou@clear-code.com"]
 
   readme_path = File.join(base_dir, "README.md")
   spec.summary = "Preprocessor for Jekyll to support i18n"
