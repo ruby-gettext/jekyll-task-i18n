@@ -16,7 +16,7 @@ the following advantages:
 You can't use Jekyll plugins on GitHub Pages. So you can't use Jekyll
 plugin based approaches too.
 
-jekyll-localization uses `{{ 'translate target content | t:
+jekyll-localization uses `{{ 'translate target content' | t:
 'translated content' }}` markup. jekyll-i18n uses `{%t Your translated
 content %}` markup.
 
