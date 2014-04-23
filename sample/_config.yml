@@ -1,0 +1,8 @@
+title: jekyll-i18n-task sample
+markdown: kramdown
+exclude:
+  - Rakefile
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE.txt
