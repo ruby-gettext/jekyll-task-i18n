@@ -270,11 +270,15 @@ module Jekyll
 
       def msginit_options
         options = []
-        if @translator_name
-          options.concat(["--translator-name", @translator_name])
-        end
-        if @translator_email
-          options.concat(["--translator-email", @translator_email])
+        if @translator_name or @translator_email
+          if @translator_name
+            options.concat(["--translator-name", @translator_name])
+          end
+          if @translator_email
+            options.concat(["--translator-email", @translator_email])
+          end
+        else
+          options << "--no-translator"
         end
         options
       end
