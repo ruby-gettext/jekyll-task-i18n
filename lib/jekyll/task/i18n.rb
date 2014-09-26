@@ -188,12 +188,15 @@ module Jekyll
         all_po_file = all_po_file_path.to_s
         CLEAN << all_po_file if all_po_file_path.exist?
         file all_po_file => po_files do
+          sorted_po_files = po_files.sort_by do |po_file|
+            -File.mtime(po_file).to_f
+          end
           msgcat("--output", all_po_file,
                  "--no-fuzzy",
                  "--no-all-comments",
                  "--sort-by-msgid",
                  "--no-obsolete-entries",
-                 *po_files)
+                 *sorted_po_files)
         end
 
         desc "Update .po files for [#{locale}] locale"
