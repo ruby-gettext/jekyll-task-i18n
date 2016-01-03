@@ -2,7 +2,7 @@
 
 ## 1.0.1: 2014-09-26
 
-### Improvement
+### Improvements
 
   * Stopped to require translator information.
   * Improved msgstr selection when the same msgids exist in some PO files.
