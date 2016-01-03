@@ -1,5 +1,11 @@
 # News
 
+## 1.0.2: 2016-01-03
+
+### Improvements
+
+ * Stopped to use fuzzy entries in edit.po for translation.
+
 ## 1.0.1: 2014-09-26
 
 ### Improvements
