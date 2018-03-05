@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2015 The ruby-gettext project
+# Copyright (C) 2014-2018 The ruby-gettext project
 #
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 module Jekyll
   module Task
     class I18n
-      VERSION = "1.0.3"
+      VERSION = "1.0.4"
     end
   end
 end
