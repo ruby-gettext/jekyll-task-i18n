@@ -1,5 +1,11 @@
 # News
 
+## 1.0.4: 2018-03-05
+
+### Fixes
+
+ * Keep `PO-Revision-Date` in .edit.po.
+
 ## 1.0.3: 2018-03-05
 
 ### Improvements
