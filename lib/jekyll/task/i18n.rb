@@ -1,4 +1,4 @@
-# Copyright (C) 2014  The ruby-gettext project
+# Copyright (C) 2014-2018  The ruby-gettext project
 # Copyright (C) 2013-2014 Droonga Project
 #
 # This library is free software; you can redistribute it and/or
@@ -105,7 +105,9 @@ module Jekyll
             end
             unless path.edit_po_file.exist?
               if path.po_file.exist?
-                cp(path.po_file.to_s, path.edit_po_file.to_s)
+                msgcat("--output", path.edit_po_file.to_s,
+                       "--update-po-revision-date",
+                       path.po_file.to_s)
               else
                 msginit("--input", path.pot_file.to_s,
                         "--output", path.edit_po_file.to_s,
@@ -125,6 +127,9 @@ module Jekyll
                        "--no-obsolete-entries",
                        path.po_file.to_s,
                        path.edit_po_file.to_s)
+              msgcat("--output", path.edit_po_file.to_s,
+                     "--update-po-revision-date",
+                     path.edit_po_file.to_s)
             end
             if path.all_po_file.exist?
               msgmerge("--output", path.edit_po_file.to_s,
@@ -133,6 +138,9 @@ module Jekyll
                        "--no-obsolete-entries",
                        path.all_po_file.to_s,
                        path.edit_po_file.to_s)
+              msgcat("--output", path.edit_po_file.to_s,
+                     "--update-po-revision-date",
+                     path.edit_po_file.to_s)
             end
           end
         end

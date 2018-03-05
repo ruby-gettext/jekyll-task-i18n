@@ -1,4 +1,4 @@
-# Copyright (C) 2014  The ruby-gettext project
+# Copyright (C) 2014-2018  The ruby-gettext project
 #
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.licenses = ["LGPLv2"]
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency("gettext", ">= 3.1.1")
+  spec.add_runtime_dependency("gettext", ">= 3.2.8")
   spec.add_runtime_dependency("yard")
 
   spec.add_development_dependency("rake")
