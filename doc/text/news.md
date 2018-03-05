@@ -1,5 +1,11 @@
 # News
 
+## 1.0.3: 2018-03-05
+
+### Improvements
+
+ * Removed `PO-Revision-Date` from .po. Because it may cause a conflict.
+
 ## 1.0.2: 2016-01-03
 
 ### Improvements
