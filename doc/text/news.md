@@ -1,5 +1,11 @@
 # News
 
+## 1.0.7: 2023-08-13
+
+### Improvements
+
+ * Stopped to update `PO-Revision-Date` automatically.
+
 ## 1.0.6: 2023-08-13
 
 ### Improvements
