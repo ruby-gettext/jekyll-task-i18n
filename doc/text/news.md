@@ -1,5 +1,12 @@
 # News
 
+## 1.0.5: 2023-08-13
+
+### Fixes
+
+ * Stopped to remove `Language-Team`, `Last-Translator`,
+   `Report-Msgid-Bugs-To` and `PO-Revision-Date` from .po.
+
 ## 1.0.4: 2018-03-05
 
 ### Fixes
