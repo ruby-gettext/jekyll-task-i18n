@@ -1,8 +1,14 @@
 # News
 
+## 1.0.6: 2023-08-13
+
+### Improvements
+
+ * Stopped to wrap messages for stable diff.
+
 ## 1.0.5: 2023-08-13
 
-### Fixes
+### Improvements
 
  * Stopped to remove `Language-Team`, `Last-Translator`,
    `Report-Msgid-Bugs-To` and `PO-Revision-Date` from .po.
