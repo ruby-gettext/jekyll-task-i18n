@@ -17,7 +17,7 @@
 module Jekyll
   module Task
     class I18n
-      VERSION = "1.0.6"
+      VERSION = "1.0.7"
     end
   end
 end
