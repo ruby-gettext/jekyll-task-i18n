@@ -101,6 +101,7 @@ module Jekyll
             end
             msgcat("--output", path.pot_file.to_s,
                    "--no-all-comments",
+                   "--no-wrap",
                    "--remove-header-field=Language-Team",
                    "--remove-header-field=Last-Translator",
                    "--remove-header-field=POT-Creation-Date",
@@ -113,40 +114,46 @@ module Jekyll
             end
             unless path.edit_po_file.exist?
               if path.po_file.exist?
-                msgcat("--output", path.edit_po_file.to_s,
+                msgcat("--no-wrap",
+                       "--output", path.edit_po_file.to_s,
                        "--update-po-revision-date",
                        path.po_file.to_s)
               else
                 msginit("--input", path.source_pot_file.to_s,
-                        "--output", path.edit_po_file.to_s,
-                        "--locale", locale)
+                        "--locale", locale,
+                        "--no-wrap",
+                        "--output", path.edit_po_file.to_s)
               end
             end
 
             edit_po_file_mtime = path.edit_po_file.mtime
-            msgmerge("--update",
+            msgmerge("--no-wrap",
                      "--sort-by-file",
-                     "--no-wrap",
+                     "--update",
                      path.edit_po_file.to_s,
                      path.source_pot_file.to_s)
             if path.po_file.exist? and path.po_file.mtime > edit_po_file_mtime
-              msgmerge("--output", path.edit_po_file.to_s,
+              msgmerge("--no-obsolete-entries",
+                       "--no-wrap",
+                       "--output", path.edit_po_file.to_s,
                        "--sort-by-file",
-                       "--no-obsolete-entries",
                        path.po_file.to_s,
                        path.edit_po_file.to_s)
-              msgcat("--output", path.edit_po_file.to_s,
+              msgcat("--no-wrap",
+                     "--output", path.edit_po_file.to_s,
                      "--update-po-revision-date",
                      path.edit_po_file.to_s)
             end
             if path.all_po_file.exist?
-              msgmerge("--output", path.edit_po_file.to_s,
-                       "--sort-by-file",
-                       "--no-fuzzy-matching",
+              msgmerge("--no-fuzzy-matching",
                        "--no-obsolete-entries",
+                       "--no-wrap",
+                       "--output", path.edit_po_file.to_s,
+                       "--sort-by-file",
                        path.all_po_file.to_s,
                        path.edit_po_file.to_s)
-              msgcat("--output", path.edit_po_file.to_s,
+              msgcat("--no-wrap",
+                     "--output", path.edit_po_file.to_s,
                      "--update-po-revision-date",
                      path.edit_po_file.to_s)
             end
@@ -186,13 +193,14 @@ module Jekyll
 
           CLEAN << path.time_stamp_file.to_s if path.time_stamp_file.exist?
           file po_file => [path.edit_po_file.to_s] do
-            msgcat("--output", po_file,
+            msgcat("--no-all-comments",
                    "--no-fuzzy",
-                   "--sort-by-file",
-                   "--no-all-comments",
-                   "--no-report-warning",
                    "--no-obsolete-entries",
+                   "--no-report-warning",
+                   "--no-wrap",
+                   "--output", po_file,
                    "--remove-header-field=POT-Creation-Date",
+                   "--sort-by-file",
                    path.edit_po_file.to_s)
             touch(path.time_stamp_file.to_s)
           end
@@ -205,11 +213,12 @@ module Jekyll
           sorted_po_files = po_files.sort_by do |po_file|
             -File.mtime(po_file).to_f
           end
-          msgcat("--output", all_po_file,
+          msgcat("--no-all-comments",
                  "--no-fuzzy",
-                 "--no-all-comments",
-                 "--sort-by-msgid",
                  "--no-obsolete-entries",
+                 "--no-wrap",
+                 "--output", all_po_file,
+                 "--sort-by-msgid",
                  *sorted_po_files)
         end
 
