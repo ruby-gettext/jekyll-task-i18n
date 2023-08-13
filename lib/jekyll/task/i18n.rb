@@ -188,7 +188,6 @@ module Jekyll
                    "--remove-header-field=Last-Translator",
                    "--remove-header-field=Language-Team",
                    "--remove-header-field=POT-Creation-Date",
-                   "--remove-header-field=PO-Revision-Date",
                    path.edit_po_file.to_s)
             touch(path.time_stamp_file.to_s)
           end
