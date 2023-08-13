@@ -116,7 +116,6 @@ module Jekyll
               if path.po_file.exist?
                 msgcat("--no-wrap",
                        "--output", path.edit_po_file.to_s,
-                       "--update-po-revision-date",
                        path.po_file.to_s)
               else
                 msginit("--input", path.source_pot_file.to_s,
@@ -141,7 +140,6 @@ module Jekyll
                        path.edit_po_file.to_s)
               msgcat("--no-wrap",
                      "--output", path.edit_po_file.to_s,
-                     "--update-po-revision-date",
                      path.edit_po_file.to_s)
             end
             if path.all_po_file.exist?
@@ -154,7 +152,6 @@ module Jekyll
                        path.edit_po_file.to_s)
               msgcat("--no-wrap",
                      "--output", path.edit_po_file.to_s,
-                     "--update-po-revision-date",
                      path.edit_po_file.to_s)
             end
           end
