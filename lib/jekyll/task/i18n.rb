@@ -1,5 +1,5 @@
-# Copyright (C) 2014-2018  The ruby-gettext project
-# Copyright (C) 2013-2014 Droonga Project
+# Copyright (C) 2014-2023  The ruby-gettext project
+# Copyright (C) 2013-2014  Droonga Project
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -96,9 +96,17 @@ module Jekyll
             generator = YARD::I18n::PotGenerator.new(relative_base_path.to_s)
             yard_file = YARD::CodeObjects::ExtraFileObject.new(target_file)
             generator.parse_files([yard_file])
-            path.pot_file.open("w") do |pot_file|
-              pot_file.puts(generator.generate)
+            path.source_pot_file.open("w") do |output|
+              output.puts(generator.generate)
             end
+            msgcat("--output", path.pot_file.to_s,
+                   "--no-all-comments",
+                   "--remove-header-field=Language-Team",
+                   "--remove-header-field=Last-Translator",
+                   "--remove-header-field=POT-Creation-Date",
+                   "--remove-header-field=Report-Msgid-Bugs-To",
+                   "--sort-by-file",
+                   path.source_pot_file.to_s)
             if po_file_is_updated?(path)
               rm_f(path.edit_po_file.to_s)
               rm_f(path.all_po_file.to_s)
@@ -109,7 +117,7 @@ module Jekyll
                        "--update-po-revision-date",
                        path.po_file.to_s)
               else
-                msginit("--input", path.pot_file.to_s,
+                msginit("--input", path.source_pot_file.to_s,
                         "--output", path.edit_po_file.to_s,
                         "--locale", locale)
               end
@@ -120,7 +128,7 @@ module Jekyll
                      "--sort-by-file",
                      "--no-wrap",
                      path.edit_po_file.to_s,
-                     path.pot_file.to_s)
+                     path.source_pot_file.to_s)
             if path.po_file.exist? and path.po_file.mtime > edit_po_file_mtime
               msgmerge("--output", path.edit_po_file.to_s,
                        "--sort-by-file",
@@ -184,9 +192,6 @@ module Jekyll
                    "--no-all-comments",
                    "--no-report-warning",
                    "--no-obsolete-entries",
-                   "--remove-header-field=Report-Msgid-Bugs-To",
-                   "--remove-header-field=Last-Translator",
-                   "--remove-header-field=Language-Team",
                    "--remove-header-field=POT-Creation-Date",
                    path.edit_po_file.to_s)
             touch(path.time_stamp_file.to_s)
@@ -345,6 +350,10 @@ module Jekyll
 
         def pot_file
           po_dir + "#{target_file_base}.pot"
+        end
+
+        def source_pot_file
+          po_dir + "#{target_file_base}.source.pot"
         end
 
         def translated_file
