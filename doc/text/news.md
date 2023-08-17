@@ -1,16 +1,22 @@
 # News
 
-## 1.0.9: 2023-08-13
+## 1.1.0: 2023-08-17
 
 ### Improvements
 
- * Stopped to remove normal comments from .po.
+  * Stopped to update `PO-Revision-Date` automatically.
 
-## 1.0.8: 2023-08-13
+## 1.0.9: 2023-08-17
 
 ### Improvements
 
- * Use GNU `msgcat` if possible to output portable wrapped output.
+  * Stopped to remove normal comments from .po.
+
+## 1.0.8: 2023-08-17
+
+### Improvements
+
+  * Use GNU `msgcat` if possible to output portable wrapped output.
 
 ### Fixes
 
@@ -20,38 +26,38 @@
 
 ### Improvements
 
- * Stopped to update `PO-Revision-Date` automatically.
+  * Stopped to update `PO-Revision-Date` automatically.
 
 ## 1.0.6: 2023-08-13
 
 ### Improvements
 
- * Stopped to wrap messages for stable diff.
+  * Stopped to wrap messages for stable diff.
 
 ## 1.0.5: 2023-08-13
 
 ### Improvements
 
- * Stopped to remove `Language-Team`, `Last-Translator`,
-   `Report-Msgid-Bugs-To` and `PO-Revision-Date` from .po.
+  * Stopped to remove `Language-Team`, `Last-Translator`,
+    `Report-Msgid-Bugs-To` and `PO-Revision-Date` from .po.
 
 ## 1.0.4: 2018-03-05
 
 ### Fixes
 
- * Keep `PO-Revision-Date` in .edit.po.
+  * Keep `PO-Revision-Date` in .edit.po.
 
 ## 1.0.3: 2018-03-05
 
 ### Improvements
 
- * Removed `PO-Revision-Date` from .po. Because it may cause a conflict.
+  * Removed `PO-Revision-Date` from .po. Because it may cause a conflict.
 
 ## 1.0.2: 2016-01-03
 
 ### Improvements
 
- * Stopped to use fuzzy entries in edit.po for translation.
+  * Stopped to use fuzzy entries in edit.po for translation.
 
 ## 1.0.1: 2014-09-26
 
