@@ -198,6 +198,21 @@ module Jekyll
                    "--remove-header-field=POT-Creation-Date",
                    "--sort-by-file",
                    path.edit_po_file.to_s)
+            mv(po_file, path.tmp_po_file.to_s)
+            begin
+              # GNU msgcat
+              sh("msgcat",
+                 "--output", po_file,
+                 path.tmp_po_file.to_s)
+            rescue => error
+              if error.message.start_with?("Command failed with status")
+                mv(path.tmp_po_file.to_s, po_file)
+              else
+                raise
+              end
+            else
+              rm(path.tmp_po_file.to_s)
+            end
             touch(path.time_stamp_file.to_s)
           end
         end
@@ -351,6 +366,10 @@ module Jekyll
 
         def edit_po_file
           po_dir + "#{target_file_base}.edit.po"
+        end
+
+        def tmp_po_file
+          po_dir + "#{target_file_base}.tmp.po"
         end
 
         def pot_file
