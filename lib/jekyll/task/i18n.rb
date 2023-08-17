@@ -120,7 +120,6 @@ module Jekyll
               else
                 msginit("--input", path.source_pot_file.to_s,
                         "--locale", locale,
-                        "--no-wrap",
                         "--output", path.edit_po_file.to_s)
               end
             end
