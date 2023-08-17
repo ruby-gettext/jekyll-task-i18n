@@ -189,8 +189,8 @@ module Jekyll
 
           CLEAN << path.time_stamp_file.to_s if path.time_stamp_file.exist?
           file po_file => [path.edit_po_file.to_s] do
-            msgcat("--no-all-comments",
-                   "--no-fuzzy",
+            msgcat("--no-fuzzy",
+                   "--no-location",
                    "--no-obsolete-entries",
                    "--no-report-warning",
                    "--no-wrap",
