@@ -99,9 +99,10 @@ module Jekyll
             path.source_pot_file.open("w") do |output|
               output.puts(generator.generate)
             end
-            msgcat("--output", path.pot_file.to_s,
-                   "--no-all-comments",
+            msgcat("--no-all-comments",
+                   "--no-update-po-revision-date",
                    "--no-wrap",
+                   "--output", path.pot_file.to_s,
                    "--remove-header-field=Language-Team",
                    "--remove-header-field=Last-Translator",
                    "--remove-header-field=POT-Creation-Date",
@@ -114,7 +115,8 @@ module Jekyll
             end
             unless path.edit_po_file.exist?
               if path.po_file.exist?
-                msgcat("--no-wrap",
+                msgcat("--no-update-po-revision-date",
+                       "--no-wrap",
                        "--output", path.edit_po_file.to_s,
                        path.po_file.to_s)
               else
@@ -137,7 +139,8 @@ module Jekyll
                        "--sort-by-file",
                        path.po_file.to_s,
                        path.edit_po_file.to_s)
-              msgcat("--no-wrap",
+              msgcat("--no-update-po-revision-date",
+                     "--no-wrap",
                      "--output", path.edit_po_file.to_s,
                      path.edit_po_file.to_s)
             end
@@ -149,7 +152,8 @@ module Jekyll
                        "--sort-by-file",
                        path.all_po_file.to_s,
                        path.edit_po_file.to_s)
-              msgcat("--no-wrap",
+              msgcat("--no-update-po-revision-date",
+                     "--no-wrap",
                      "--output", path.edit_po_file.to_s,
                      path.edit_po_file.to_s)
             end
@@ -193,6 +197,7 @@ module Jekyll
                    "--no-location",
                    "--no-obsolete-entries",
                    "--no-report-warning",
+                   "--no-update-po-revision-date",
                    "--no-wrap",
                    "--output", po_file,
                    "--remove-header-field=POT-Creation-Date",
