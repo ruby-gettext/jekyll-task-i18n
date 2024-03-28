@@ -101,7 +101,6 @@ module Jekyll
             end
             msgcat("--no-all-comments",
                    "--no-update-po-revision-date",
-                   "--no-wrap",
                    "--output", path.pot_file.to_s,
                    "--remove-header-field=Language-Team",
                    "--remove-header-field=Last-Translator",
@@ -116,7 +115,6 @@ module Jekyll
             unless path.edit_po_file.exist?
               if path.po_file.exist?
                 msgcat("--no-update-po-revision-date",
-                       "--no-wrap",
                        "--output", path.edit_po_file.to_s,
                        path.po_file.to_s)
               else
@@ -127,33 +125,28 @@ module Jekyll
             end
 
             edit_po_file_mtime = path.edit_po_file.mtime
-            msgmerge("--no-wrap",
-                     "--sort-by-file",
+            msgmerge("--sort-by-file",
                      "--update",
                      path.edit_po_file.to_s,
                      path.source_pot_file.to_s)
             if path.po_file.exist? and path.po_file.mtime > edit_po_file_mtime
               msgmerge("--no-obsolete-entries",
-                       "--no-wrap",
                        "--output", path.edit_po_file.to_s,
                        "--sort-by-file",
                        path.po_file.to_s,
                        path.edit_po_file.to_s)
               msgcat("--no-update-po-revision-date",
-                     "--no-wrap",
                      "--output", path.edit_po_file.to_s,
                      path.edit_po_file.to_s)
             end
             if path.all_po_file.exist?
               msgmerge("--no-fuzzy-matching",
                        "--no-obsolete-entries",
-                       "--no-wrap",
                        "--output", path.edit_po_file.to_s,
                        "--sort-by-file",
                        path.all_po_file.to_s,
                        path.edit_po_file.to_s)
               msgcat("--no-update-po-revision-date",
-                     "--no-wrap",
                      "--output", path.edit_po_file.to_s,
                      path.edit_po_file.to_s)
             end
@@ -198,26 +191,10 @@ module Jekyll
                    "--no-obsolete-entries",
                    "--no-report-warning",
                    "--no-update-po-revision-date",
-                   "--no-wrap",
                    "--output", po_file,
                    "--remove-header-field=POT-Creation-Date",
                    "--sort-by-file",
                    path.edit_po_file.to_s)
-            mv(po_file, path.tmp_po_file.to_s)
-            begin
-              # GNU msgcat
-              sh("msgcat",
-                 "--output", po_file,
-                 path.tmp_po_file.to_s)
-            rescue => error
-              if error.message.start_with?("Command failed with status")
-                mv(path.tmp_po_file.to_s, po_file)
-              else
-                raise
-              end
-            else
-              rm(path.tmp_po_file.to_s)
-            end
             touch(path.time_stamp_file.to_s)
           end
         end
@@ -232,7 +209,6 @@ module Jekyll
           msgcat("--no-all-comments",
                  "--no-fuzzy",
                  "--no-obsolete-entries",
-                 "--no-wrap",
                  "--output", all_po_file,
                  "--sort-by-msgid",
                  *sorted_po_files)
@@ -371,10 +347,6 @@ module Jekyll
 
         def edit_po_file
           po_dir + "#{target_file_base}.edit.po"
-        end
-
-        def tmp_po_file
-          po_dir + "#{target_file_base}.tmp.po"
         end
 
         def pot_file
